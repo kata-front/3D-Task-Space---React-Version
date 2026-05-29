@@ -1,8 +1,11 @@
+//import { Scene } from "./app/components/scene";
+
+import { Hero } from "./app/components/hero";
 
 function App() {
   return (
     <>
-      <h1>Get started</h1>
+      <Hero />
     </>
   );
 }
