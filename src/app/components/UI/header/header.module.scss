@@ -1,0 +1,70 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  background-color: rgba(0, 0, 0, 1);
+
+  padding: 20px;
+  color: white;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    &__title {
+      font-family: "Savate";
+      font-size: 24px;
+
+      color: transparent;
+      background: linear-gradient(180deg, white 70%, gray);
+      background-clip: text;
+    }
+  }
+
+  &__auth-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+    & > * {
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease-in-out;
+    }
+
+    & > *::after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 2px;
+      background-color: white;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s ease-in-out;
+    }
+
+    & > *:hover {
+      color: rgb(197, 197, 197);
+      transform: translateY(-2px);
+    }
+
+    & > *:hover::after {
+      width: 100%;
+    }
+  }
+}
