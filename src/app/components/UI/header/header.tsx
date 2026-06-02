@@ -5,9 +5,10 @@ import gsap from "gsap";
 
 const Header: FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
+
   useGSAP(() => {
     gsap.to(headerRef.current, {
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      backgroundColor: "rgba(0, 0, 0, 0.1)",
       scrollTrigger: {
         trigger: document.body,
         start: 0,

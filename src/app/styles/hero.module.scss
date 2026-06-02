@@ -1,7 +1,34 @@
 .hero {
-    width: 100vw;
-    height: 100vh;
+  margin-top: 7vh;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 
-    background-color: #0e0e0e;
+  background-color: #0e0e0e;
 
+  &__title-section {
+    top: 0;
+    left: 0;
+
+    position: absolute;
+    width: 100%;
+    height: 93vh;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    span {
+      font-family: "Courier New", Courier, monospace;
+        font-size: large;
+
+      padding: 10px;
+      color: white;
+      text-align: center;
+    }
+  }
 }

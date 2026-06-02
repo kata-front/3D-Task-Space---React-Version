@@ -1,21 +1,39 @@
-import type { FC } from "react";
+import { useRef, type FC } from "react";
 import styles from "../styles/hero.module.scss";
-import Header from "./UI/header/header";
 import { Canvas } from "@react-three/fiber";
 import SolarSystemMaket from "./UI/maketSolarSystem/solarSystemMaket";
+import useHeroAnimate from "../../utils/hooks/useHeroAnimate";
 
 export const Hero: FC = () => {
+  const titleSpanRef = useRef<HTMLSpanElement>(null) as React.RefObject<HTMLSpanElement>;
+  const titleSectionRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+  const heroRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
+
+  const canvasRef = useRef<HTMLCanvasElement>(null) as React.RefObject<HTMLCanvasElement>;
+
+  useHeroAnimate({
+    titleSpanRef,
+    titleSectionRef,
+    heroRef,
+    canvasRef,
+  });
+
   return (
-    <div className={styles.hero}>
-      <Header />
+    <div className={styles.hero} ref={heroRef}>
+      <div ref={titleSectionRef} className={styles["hero__title-section"]}>
+        <span ref={titleSpanRef}>
+          Task System - task manager of new generation
+        </span>
+      </div>
       <Canvas
-        camera={{ 
-            position: [0, 5, 5],
-            //fov: 75  
+        ref={canvasRef}
+        camera={{
+          position: [0, 2, 7],
+          fov: 75,
         }}
         style={{
           width: "100%",
-          height: "45vh",
+          height: "91vh",
         }}
       >
         <SolarSystemMaket />
@@ -25,7 +43,6 @@ export const Hero: FC = () => {
         <span>Start to use planet for your tasks.</span>
         <span>Get started</span>
       </section>
-      <div style={{ height: "1000vh" }}></div>
     </div>
   );
 };

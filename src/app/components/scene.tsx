@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { type FC } from "react";
-import { Sun } from "./three_components/solarSystem";
+import Sun from "./three_components/Sun";
 import { OrbitControls } from "@react-three/drei";
 
 export const Scene: FC =() => {
