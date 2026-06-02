@@ -1,16 +1,11 @@
+import Sun from "./Sun";
 
 
-export const Sun = () => {
+export const SolarSystem = () => {
   return (
     <>
       <mesh>
-        <sphereGeometry args={[10, 32, 32]} />
-        <meshPhongMaterial 
-          color="yellow" 
-          wireframe 
-          emissive="yellow"
-          emissiveIntensity={1}
-        />
+        <Sun />
       </mesh>
     </>
   );
