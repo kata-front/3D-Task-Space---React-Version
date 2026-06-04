@@ -33,16 +33,11 @@ export const Hero: FC = () => {
         }}
         style={{
           width: "100%",
-          height: "91vh",
+          height: "100vh",
         }}
       >
         <SolarSystemMaket />
       </Canvas>
-      <section>
-        <span>3D Planet System</span>
-        <span>Start to use planet for your tasks.</span>
-        <span>Get started</span>
-      </section>
     </div>
   );
 };

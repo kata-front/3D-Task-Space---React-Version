@@ -1,0 +1,98 @@
+.info-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 7vh 2rem;
+  color: var(--color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(127, 26, 77, 0.15) 0%,
+    transparent 70%
+  );
+
+  &__title,
+  &__about-this,
+  &__list {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  &__title {
+    font-family: "Savate", Courier, monospace;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: transparent;
+    background-clip: text;
+    background: linear-gradient(135deg, var(--neon-color), #b44dff);
+
+    -webkit-background-clip: text;
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  &__about-this {
+    cursor: pointer;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.3s;
+
+    &:hover {
+      border-color: var(--neon-color);
+    }
+  }
+
+  &__list {
+    list-style: none;
+    counter-reset: steps;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0;
+
+    li {
+      cursor: pointer;
+      counter-increment: steps;
+      position: relative;
+      padding-left: 4rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--color);
+
+      &::before {
+        content: counter(steps, decimal-leading-zero);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 3rem;
+        font-weight: bold;
+        color: rgba(0, 229, 255, 0.15);
+        font-family: "Savate", Courier, monospace;
+        pointer-events: none;
+        transition: color 0.3s;
+      }
+
+      &:hover::before {
+        color: rgba(0, 229, 255, 0.4); 
+      }
+    }
+  }
+}
