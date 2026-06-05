@@ -1,27 +1,27 @@
 import Sun from "../../three_components/Sun";
 import { OrbitControls } from "@react-three/drei";
-import * as index from "../../../../index";
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, type FC } from "react";
 import * as THREE from "three";
+import type { MTPlanet } from "../../../../utils/types";
 
-const SolarSystemMaket = () => {
+const SolarSystemMaket: FC<{ planets: MTPlanet[]}> = ({ planets }) => {
   const textures = useTexture(
-    index.planets_maket.map((planet) => planet.texture),
+    planets.map((planet) => planet.texture),
   );
 
   const orbitsRef = useRef<THREE.Group[]>([]);
 
   useFrame((_, delta) => {
     orbitsRef.current.forEach((orbit, i) => {
-      orbit.rotation.y += index.planets_maket[i].speedDelay * 0.5 * delta;
+      orbit.rotation.y += planets[i].speedDelay * 0.5 * delta;
     });
   });
 
   const orbitGeometries = useMemo(
     () =>
-      index.planets_maket.map((planet) => {
+      planets.map((planet) => {
         const points: THREE.Vector3[] = [];
         const segments = 128;
         for (let i = 0; i <= segments; i++) {
@@ -43,9 +43,9 @@ const SolarSystemMaket = () => {
     <>
       <ambientLight intensity={0.5} />
       <pointLight intensity={10} distance={10} position={[0, 0, 0]} />
-      <Sun />
+      <Sun radius={1} />
 
-      {index.planets_maket.map((planet, i) => {
+      {planets.map((planet, i) => {
         return (
           <group
             rotation={[0, Math.random() * Math.PI * 2, 0]}

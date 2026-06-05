@@ -6,3 +6,9 @@ export type MTPlanet = {
     distance: number
     speedDelay: number
 }
+
+export type MTTask = {
+    id: number,
+    title: string,
+    completed: boolean
+}

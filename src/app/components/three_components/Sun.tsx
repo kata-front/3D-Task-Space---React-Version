@@ -1,14 +1,13 @@
 import { useTexture } from "@react-three/drei";
+import type { FC } from "react";
 
-const Sun = () => {
+const Sun: FC<{radius: number}> = ({ radius }) => {
   const sunTexture = useTexture("/textures/sun-texture.webp");
   return (
     <mesh>
-      <sphereGeometry args={[1, 32, 32]} />
-      <meshPhongMaterial
+      <sphereGeometry args={[radius, 32, 32]} />
+      <meshBasicMaterial
         color="yellow"
-        emissive="yellow"
-        emissiveIntensity={0.2}
         map={sunTexture}
       />
     </mesh>

@@ -4,11 +4,13 @@ import gsap from "gsap"
 const useInfoAnimate = ({
     infoRef,
     aboutSpanRef,
-    listRef
+    listRef,
+    buttonRef
 }: {
     infoRef: React.RefObject<HTMLDivElement>,
     aboutSpanRef: React.RefObject<HTMLSpanElement>,
     listRef: React.RefObject<HTMLOListElement>,
+    buttonRef: React.RefObject<HTMLButtonElement>,
 }) => {
     useGSAP(() => {
         const items = gsap.utils.toArray(listRef.current?.children);
@@ -36,7 +38,19 @@ const useInfoAnimate = ({
             ease: "power3.inOut",
             stagger: 0.1
         });
-    }, [ infoRef, aboutSpanRef, listRef ])
+
+        tl.fromTo(buttonRef.current, {
+            opacity: 0,
+            yPercent: 100,
+            duration: 1,
+            ease: "power3.inOut",
+        }, {
+            opacity: 1,
+            yPercent: 0,
+            duration: 1,
+            ease: "power3.inOut",
+        })
+    }, [ infoRef, aboutSpanRef, listRef, buttonRef ])
 }
 
 export default useInfoAnimate

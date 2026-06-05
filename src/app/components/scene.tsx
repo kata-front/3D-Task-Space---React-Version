@@ -1,9 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import { type FC } from "react";
-import Sun from "./three_components/Sun";
 import { OrbitControls } from "@react-three/drei";
+import StorageApi from "../../utils/storage";
+import { SolarSystem } from "./three_components/solarSystem";
 
 export const Scene: FC =() => {
+  const tasks = StorageApi.getTasks();
+
   return (
     <Canvas
       camera={{
@@ -16,7 +19,7 @@ export const Scene: FC =() => {
         background: '#000',
       }}
     >
-      <Sun />
+      <SolarSystem tasks={tasks}/>
       <OrbitControls 
         maxDistance={100}
         minDistance={20}

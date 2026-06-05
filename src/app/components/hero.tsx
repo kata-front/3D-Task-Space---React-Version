@@ -3,6 +3,7 @@ import styles from "../styles/hero.module.scss";
 import { Canvas } from "@react-three/fiber";
 import SolarSystemMaket from "./UI/maketSolarSystem/solarSystemMaket";
 import useHeroAnimate from "../../utils/hooks/useHeroAnimate";
+import * as index from "../../index.ts";
 
 export const Hero: FC = () => {
   const titleSpanRef = useRef<HTMLSpanElement>(null) as React.RefObject<HTMLSpanElement>;
@@ -36,7 +37,7 @@ export const Hero: FC = () => {
           height: "100vh",
         }}
       >
-        <SolarSystemMaket />
+        <SolarSystemMaket planets={index.planets_maket} />
       </Canvas>
     </div>
   );

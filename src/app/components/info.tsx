@@ -15,7 +15,11 @@ const InfoSection = () => {
     null,
   ) as React.RefObject<HTMLDivElement>;
 
-  useInfoAnimate({ aboutSpanRef, listRef, infoRef });
+  const buttonRef = useRef<HTMLButtonElement>(
+    null,
+  ) as React.RefObject<HTMLButtonElement>;
+
+  useInfoAnimate({ aboutSpanRef, listRef, infoRef, buttonRef });
 
   return (
     <div className={styles["info-section"]} ref={infoRef}>
@@ -42,6 +46,10 @@ const InfoSection = () => {
           an important deadline.
         </li>
       </ol>
+      <button ref={buttonRef} className={styles["info-section__start-btn"]}>
+        Get started!
+      </button>
+      {/* <div style={{height: "100vh"}}></div> */}
     </div>
   );
 };
