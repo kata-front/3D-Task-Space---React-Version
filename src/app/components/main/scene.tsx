@@ -1,8 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { type FC } from "react";
 import { OrbitControls } from "@react-three/drei";
-import StorageApi from "../../utils/storage";
-import { SolarSystem } from "./three_components/solarSystem";
+import StorageApi from "../../../utils/storage";
+import { SolarSystem } from "../three_components/solarSystem";
 
 export const Scene: FC =() => {
   const tasks = StorageApi.getTasks();
@@ -10,7 +10,7 @@ export const Scene: FC =() => {
   return (
     <Canvas
       camera={{
-        position: [0, 0, 100],
+        position: [0, 20, 100],
         fov: 75,
       }}
       style={{

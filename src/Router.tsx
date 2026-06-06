@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App";
-import { Scene } from "./app/components/scene";
+import { Scene } from "./app/components/main/scene";
 
 export const Router = createBrowserRouter([
     {
