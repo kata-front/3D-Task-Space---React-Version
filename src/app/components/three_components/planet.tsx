@@ -1,17 +1,21 @@
-import { useMemo, useRef, type Dispatch, type FC, type SetStateAction } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  type FC,
+} from "react";
 import type { MTPlanet } from "../../../utils/types";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 
-const Planet: FC<{ 
-  planet: MTPlanet
-  setActivePlanet: Dispatch<SetStateAction<{
-    planetInfo: MTPlanet
-    planetCoords: THREE.Vector3
-  } | null>>
-}> = ({ planet, setActivePlanet }) => {
+const Planet: FC<{
+  planet: MTPlanet;
+  setRef: (id: number, refs: THREE.Mesh) => void;
+  onclick: (id: number) => void;
+}> = ({ planet, setRef, onclick }) => {
   const orbitRef = useRef<THREE.Group>(null);
+  const planetRef = useRef<THREE.Mesh>(null);
 
   const texture = useTexture(planet.texture);
 
@@ -38,19 +42,26 @@ const Planet: FC<{
     return new THREE.BufferGeometry().setFromPoints(points);
   }, [planet.distance]);
 
+  useEffect(() => {
+    if (planetRef.current) {
+      setRef(planet.id, planetRef.current);
+    }
+  }, [planetRef]);
+
   return (
     <group ref={orbitRef} rotation={[0, Math.random() * Math.PI * 2, 0]}>
       <lineLoop geometry={orbitGeometry}>
         <lineBasicMaterial color="white" />
       </lineLoop>
 
-      <mesh position={[planet.distance, 0, 0]} onClick={(e) => {
-        e.stopPropagation();
-        setActivePlanet({
-          planetInfo: planet,
-          planetCoords: e.object.getWorldPosition(new THREE.Vector3()),
-        });
-      }}>
+      <mesh
+        ref={planetRef}
+        position={[planet.distance, 0, 0]}
+        onClick={(e) => {
+          e.stopPropagation();
+          onclick(planet.id);
+        }}
+      >
         <sphereGeometry args={[planet.radius, 32, 32]} />
         <meshStandardMaterial map={texture} />
       </mesh>

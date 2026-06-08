@@ -22,7 +22,7 @@ const Header: FC = () => {
     <header className={styles.header} ref={headerRef}>
       <section className={styles["header__logo-section"]}>
         <img
-          src="/public/image.jpeg"
+          src="/image.jpeg"
           alt="logo"
           className={styles["header__logo-section__logo"]}
         />

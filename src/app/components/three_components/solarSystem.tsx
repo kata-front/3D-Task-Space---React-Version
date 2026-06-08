@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState, type FC } from "react";
+import { useEffect, useMemo, useRef, useState, type ElementRef, type FC } from "react";
 import Sun from "./Sun";
 import type { MTPlanet, MTTask } from "../../../utils/types";
 import Planet from "./planet";
-import { useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import gsap from "gsap";
+import { OrbitControls } from "@react-three/drei";
 
 export const SolarSystem: FC<{
   tasks: MTTask[];
@@ -14,7 +14,7 @@ export const SolarSystem: FC<{
       tasks.map((task) => ({
         id: task.id,
         name: task.title,
-        texture: `/textures/planets/planet-${task.id}.webp`,
+        texture: `/textures/planets/planet-${Math.floor(Math.random() * 3) + 1}.webp`,
         radius: Math.random() + 1 * 2,
         distance: 10 + task.id * 10,
         speedDelay: Math.random() * 0.1,
@@ -22,29 +22,30 @@ export const SolarSystem: FC<{
     [tasks],
   );
 
-  const {camera} = useThree();
-
-  // TODO! correction animate and create effect
-  const [activePlanet, setActivePlanet] = useState<null | {
-    planetInfo: MTPlanet
-    planetCoords: THREE.Vector3
-  }>(null);
+  const orbitControlsRef = useRef<ElementRef<typeof OrbitControls>>(null);
+  const planetsRefs = useRef<Map<number, THREE.Mesh>>(new Map());
+  const [activePlanetId, setActivePlanetId] = useState<number | null>(null);
 
   useEffect(() => {
-    if (activePlanet) {
-      const planetPosition = activePlanet.planetCoords
-
-      gsap.to(camera.position, {
-        x: planetPosition.x,
-        y: planetPosition.y,
-        z: planetPosition.z + 10,
-        duration: 2,
-        onUpdate: () => {
-          camera.lookAt(planetPosition);
-        }
-      })
+    if (orbitControlsRef.current) {
+      orbitControlsRef.current.enabled = activePlanetId === null;
     }
-  }, [activePlanet]);
+  }, [activePlanetId]);
+
+  useFrame(({ camera }) => {
+    if (activePlanetId !== null) {
+      const planetMeshCoords = planetsRefs.current
+        .get(activePlanetId)
+        ?.getWorldPosition(new THREE.Vector3());
+
+      const decidesCameraPosition = planetMeshCoords
+        ?.clone()
+        .add(new THREE.Vector3(0, 5, 5));
+
+      camera.position.lerp(decidesCameraPosition!, 0.05);
+      camera.lookAt(planetMeshCoords!);
+    }
+  });
 
   return (
     <>
@@ -56,9 +57,18 @@ export const SolarSystem: FC<{
         <Planet
           key={planet.id}
           planet={planet}
-          setActivePlanet={setActivePlanet}
+          setRef={(id: number, ref: THREE.Mesh) => {
+            planetsRefs.current.set(id, ref);
+          }}
+          onclick={(id: number) => setActivePlanetId(id)}
         />
       ))}
+
+      <OrbitControls
+        maxDistance={100}
+        minDistance={20}
+        ref={orbitControlsRef}
+      />
     </>
   );
 };
