@@ -1,8 +1,11 @@
 import { useRef } from "react";
 import styles from "../styles/info.module.scss";
 import useInfoAnimate from "../../utils/hooks/useInfoAnimate";
+import { useNavigate } from "react-router";
 
 const InfoSection = () => {
+  const navigate = useNavigate();
+
   const aboutSpanRef = useRef<HTMLDivElement>(
     null,
   ) as React.RefObject<HTMLDivElement>;
@@ -46,10 +49,13 @@ const InfoSection = () => {
           an important deadline.
         </li>
       </ol>
-      <button ref={buttonRef} className={styles["info-section__start-btn"]}>
+      <button
+        onClick={() => navigate('/infoTasks')}
+        ref={buttonRef}
+        className={styles["info-section__start-btn"]}
+      >
         Get started!
       </button>
-      {/* <div style={{height: "100vh"}}></div> */}
     </div>
   );
 };

@@ -1,0 +1,43 @@
+.info-page {
+    margin-top: 7vh;
+    display: flex;
+    flex-direction: row;
+
+    height: 93vh;
+    width: 100vw;
+
+    &__create-modal {
+        width: 40vw;
+        height: 87vh;
+
+        background-color: white;
+
+        margin: 25px 3vh;
+        padding: 25px;
+        border-radius: 25px;
+
+        & > span {
+            font-family: Savate sans-serif;
+            font-size: 1.5rem;
+            
+        }
+    }
+
+    &__tasks {
+        width: 60vw;
+        height: 87vh;
+        margin-bottom: 25px;
+    }
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+
+        &__create-modal {
+            width: 86vw;
+        }
+
+        &__tasks {
+            width: auto;
+        }
+    }
+}

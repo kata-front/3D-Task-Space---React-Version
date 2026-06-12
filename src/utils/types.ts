@@ -12,3 +12,7 @@ export type MTTask = {
     title: string,
     completed: boolean
 }
+
+export type CreateTaskRequest = {
+    title: string
+}

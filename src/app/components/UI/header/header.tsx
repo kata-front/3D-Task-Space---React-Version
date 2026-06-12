@@ -2,8 +2,11 @@ import { useRef, type FC } from "react";
 import styles from "./header.module.scss";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useNavigate } from "react-router";
 
 const Header: FC = () => {
+  const navigate = useNavigate();
+
   const headerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -20,7 +23,12 @@ const Header: FC = () => {
 
   return (
     <header className={styles.header} ref={headerRef}>
-      <section className={styles["header__logo-section"]}>
+      <section
+        className={styles["header__logo-section"]}
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <img
           src="/image.jpeg"
           alt="logo"

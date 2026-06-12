@@ -37,7 +37,7 @@ export const Hero: FC = () => {
           height: "100vh",
         }}
       >
-        <SolarSystemMaket planets={index.planets_maket} />
+        <SolarSystemMaket planets={index.planet_maket} />
       </Canvas>
     </div>
   );
