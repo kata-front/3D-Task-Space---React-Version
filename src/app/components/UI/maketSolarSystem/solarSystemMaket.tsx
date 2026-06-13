@@ -1,5 +1,4 @@
 import Sun from "../../three_components/Sun";
-import { OrbitControls } from "@react-three/drei";
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef, type FC } from "react";
