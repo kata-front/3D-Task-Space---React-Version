@@ -24,6 +24,11 @@ class StorageApi {
 
     StorageApi.setTasks(tasks);
   }
+
+  static removeTask(id: number) {
+    const tasks = StorageApi.getTasks().filter((task) => task.id !== id);
+    StorageApi.setTasks(tasks);
+  }
 }
 
 export default StorageApi;

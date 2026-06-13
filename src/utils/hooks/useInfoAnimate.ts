@@ -5,15 +5,16 @@ const useInfoAnimate = ({
     infoRef,
     aboutSpanRef,
     listRef,
-    buttonRef
+    buttonsRef
 }: {
     infoRef: React.RefObject<HTMLDivElement>,
     aboutSpanRef: React.RefObject<HTMLSpanElement>,
     listRef: React.RefObject<HTMLOListElement>,
-    buttonRef: React.RefObject<HTMLButtonElement>,
+    buttonsRef: React.RefObject<HTMLDivElement>,
 }) => {
     useGSAP(() => {
         const items = gsap.utils.toArray(listRef.current?.children);
+        const buttons = gsap.utils.toArray(buttonsRef.current?.children);
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -39,18 +40,19 @@ const useInfoAnimate = ({
             stagger: 0.1
         });
 
-        tl.fromTo(buttonRef.current, {
+        tl.fromTo(buttons, {
             opacity: 0,
             yPercent: 100,
             duration: 1,
-            ease: "power3.inOut",
+            ease: "power3.inOut"
         }, {
             opacity: 1,
             yPercent: 0,
             duration: 1,
             ease: "power3.inOut",
+            stagger: 0.9
         })
-    }, [ infoRef, aboutSpanRef, listRef, buttonRef ])
+    }, [ infoRef, aboutSpanRef, listRef, buttonsRef ])
 }
 
 export default useInfoAnimate

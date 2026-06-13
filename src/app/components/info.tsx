@@ -18,11 +18,11 @@ const InfoSection = () => {
     null,
   ) as React.RefObject<HTMLDivElement>;
 
-  const buttonRef = useRef<HTMLButtonElement>(
+  const buttonsRef = useRef<HTMLDivElement>(
     null,
-  ) as React.RefObject<HTMLButtonElement>;
+  ) as React.RefObject<HTMLDivElement>;
 
-  useInfoAnimate({ aboutSpanRef, listRef, infoRef, buttonRef });
+  useInfoAnimate({ aboutSpanRef, listRef, infoRef, buttonsRef });
 
   return (
     <div className={styles["info-section"]} ref={infoRef}>
@@ -49,13 +49,10 @@ const InfoSection = () => {
           an important deadline.
         </li>
       </ol>
-      <button
-        onClick={() => navigate('/infoTasks')}
-        ref={buttonRef}
-        className={styles["info-section__start-btn"]}
-      >
-        Get started!
-      </button>
+      <div className={styles["info-section__btns-container"]} ref={buttonsRef}>
+        <button onClick={() => navigate("/solarSystem")}>Get started!</button>
+        <button onClick={() => navigate("/infoTasks")}>Check Tasks</button>
+      </div>
     </div>
   );
 };

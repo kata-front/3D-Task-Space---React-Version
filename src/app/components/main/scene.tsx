@@ -5,6 +5,7 @@ import UpdateTaskWindow from "./updateTaskWindow";
 import { useActiveTaskId } from "../../../utils/hooks/useActiveTaskId";
 import { useAppSelector } from "../../../utils/redux/store";
 import taskSlice from "../../../utils/redux/taskSlice";
+import Header from "../UI/header/header";
 
 export const Scene: FC = () => {
   const tasks = useAppSelector(taskSlice.selectors.getTasks);
@@ -14,6 +15,7 @@ export const Scene: FC = () => {
 
   return (
     <>
+      <Header />
       <Canvas
         camera={{
           position: [0, 20, 100],

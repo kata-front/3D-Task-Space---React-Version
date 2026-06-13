@@ -23,6 +23,9 @@ const taskSlice = createSlice({
       
       if (task) task.completed = !task?.completed;      
     },
+    removeTask: (state, action: PayloadAction<number>) => {
+      return state.filter((task) => task.id !== action.payload);
+    }
   },
 });
 

@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import SolarSystemMaket from "./UI/maketSolarSystem/solarSystemMaket";
 import useHeroAnimate from "../../utils/hooks/useHeroAnimate";
 import * as index from "../../index.ts";
+import { useMediaQuery } from "react-responsive";
 
 export const Hero: FC = () => {
   const titleSpanRef = useRef<HTMLSpanElement>(null) as React.RefObject<HTMLSpanElement>;
@@ -19,6 +20,8 @@ export const Hero: FC = () => {
     canvasRef,
   });
 
+  const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
+
   return (
     <div className={styles.hero} ref={heroRef}>
       <div ref={titleSectionRef} className={styles["hero__title-section"]}>
@@ -29,7 +32,7 @@ export const Hero: FC = () => {
       <Canvas
         ref={canvasRef}
         camera={{
-          position: [0, 2, 7],
+          position: [0, 2, isMobile ? 15 : 10],
           fov: 75,
         }}
         style={{
