@@ -64,7 +64,10 @@ const SolarSystemMaket: FC<{ planets: MTPlanet[]}> = ({ planets }) => {
         );
       })}
 
-      <OrbitControls enableZoom={false} enablePan={false} />
+      <OrbitControls enableZoom={false} enablePan={false} touches={{
+        ONE: undefined,
+        TWO: THREE.TOUCH.ROTATE,
+      }}/>
     </>
   );
 };
