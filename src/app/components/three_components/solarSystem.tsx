@@ -67,6 +67,7 @@ export const SolarSystem: FC<{
       ))}
 
       <OrbitControls
+        enablePan={false}
         maxDistance={300}
         minDistance={50}
         ref={orbitControlsRef}

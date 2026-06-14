@@ -123,4 +123,14 @@
       }
     }
   }
+
+  @media (max-width: 500px) {
+    &__btns-container {
+      flex-direction: column;
+
+      & > button {
+        margin: 10px 0;
+      }
+    }
+  }
 }
